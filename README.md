@@ -4,7 +4,7 @@ squid + c-icap
 
 Baseimage
 ======================
-Debian
+debian:latest
 
 Usage
 ======================
@@ -19,18 +19,18 @@ docker run -ti -p 3128:3128 sslbump-proxy
 
 Usage (Proxy)
 ======================
-Pick your fakeroot-cert and import it into your web browsers. 
-FILE PATH: /usr/local/squid/myCA.der 
-Or normally access some HTTPS webpages and "Trust Cert".
+Pick your fakeroot-cert and import it into your web browsers.  
+FILE PATH: /usr/local/squid/myCA.der  
+Or normally access some HTTPS webpages and "Trust Cert". 
 
 Note
 ======================
-Make sure your proxy safe. 
-To prevent unwanted use, firewalls or some squid-acls should be applied.
-See: <entrypoint.sh>. 
+Make sure your proxy safe.  
+To prevent unwanted use, firewalls or some squid-acls should be applied.  
+See: <entrypoint.sh>.   
 
 License
 ======================
-MIT License
+MIT License  
 see: <LICENSE>
 
