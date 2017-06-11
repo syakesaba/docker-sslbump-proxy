@@ -3,6 +3,10 @@
 
 C_ICAP_USER=c-icap
 C_ICAP_DIR=/usr/local/c-icap
+
+mkdir -p $C_ICAP_DIR/share/c_icap/templates
+mkdir -p $C_ICAP_DIR/var/log
+mkdir -p $C_ICAP_DIR/var/run/c-icap
 useradd $C_ICAP_USER -U -b $C_ICAP_DIR
 chown -R ${C_ICAP_USER}:${C_ICAP_USER} $C_ICAP_DIR
 echo "#===added config===" >> $C_ICAP_DIR/etc/c-icap.conf
@@ -15,8 +19,16 @@ cat $C_ICAP_DIR/etc/c-icap.conf | grep added\ config -A1000 #fflush()
 echo "#===added config==="
 $C_ICAP_DIR/bin/c-icap -D -d 10 -f $C_ICAP_DIR/etc/c-icap.conf
 
+
 SQUID_USER=squid
 SQUID_DIR=/usr/local/squid
+
+openssl req -new -newkey rsa:2048 -nodes -days 3650 -x509 -keyout $SQUID_DIR/myCA.pem -out $SQUID_DIR/myCA.crt \
+ -subj "/C=JP/ST=Ikebukuro/L=Tokyo/O=Dollers/OU=Dollers Co.,Ltd./CN=squid.local"
+openssl x509 -in $SQUID_DIR/myCA.crt -outform DER -out $SQUID_DIR/myCA.der
+mkdir -p $SQUID_DIR/var/lib
+$SQUID_DIR/libexec/ssl_crtd -c -s $SQUID_DIR/var/lib/ssl_db
+mkdir -p $SQUID_DIR/var/cache
 useradd $SQUID_USER -U -b $SQUID_DIR
 chown -R ${SQUID_USER}:${SQUID_USER} $SQUID_DIR
 echo "#====added config===" >> $SQUID_DIR/etc/squid.conf
