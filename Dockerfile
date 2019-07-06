@@ -5,21 +5,21 @@ ENV SQUID_DIR /usr/local/squid
 ENV C_ICAP_DIR /usr/local/c-icap
 
 RUN apt-get update && \
-    apt-get -qq -y install openssl libssl1.0-dev build-essential wget curl net-tools dnsutils tcpdump && \
+    apt-get -qq -y install openssl libssl1.0-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-# squid 3.5.27
-RUN wget http://www.squid-cache.org/Versions/v3/3.5/squid-3.5.27.tar.gz && \
-    tar xzvf squid-3.5.27.tar.gz && \
-    cd squid-3.5.27 && \
-    ./configure --prefix=$SQUID_DIR --enable-ssl --with-openssl --enable-ssl-crtd --with-large-files --enable-auth && \
+# squid 4.7
+RUN wget http://www.squid-cache.org/Versions/v4/squid-4.7.tar.gz && \
+    tar xzvf squid-4.7.tar.gz && \
+    cd squid-4.7 && \
+    ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
 
-# c-icap 0.5.2
-RUN wget https://downloads.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.2.tar.gz && \
-    tar xzvf c_icap-0.5.2.tar.gz && \
-    cd c_icap-0.5.2 && \
+# c-icap 0.5.5
+RUN wget https://downloads.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.5.tar.gz && \
+    tar xzvf c_icap-0.5.5.tar.gz && \
+    cd c_icap-0.5.5 && \
     ./configure --enable-large-files --enable-lib-compat --prefix=$C_ICAP_DIR && \
     make -j4 && \
     make install
