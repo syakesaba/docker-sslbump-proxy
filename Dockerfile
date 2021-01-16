@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian
 MAINTAINER SYA-KE <syakesaba@gmail.com>
 
 ENV SQUID_DIR /usr/local/squid
@@ -8,18 +8,18 @@ RUN apt-get update && \
     apt-get -qq -y install openssl libssl-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-# squid 4.8
-RUN wget http://www.squid-cache.org/Versions/v4/squid-4.8.tar.gz && \
-    tar xzvf squid-4.8.tar.gz && \
-    cd squid-4.8 && \
+# squid 4.13
+RUN wget http://www.squid-cache.org/Versions/v4/squid-4.13.tar.gz && \
+    tar xzvf squid-4.13.tar.gz && \
+    cd squid-4.13 && \
     ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
 
 # c-icap 0.5.5
-RUN wget https://downloads.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.5.tar.gz && \
-    tar xzvf c_icap-0.5.5.tar.gz && \
-    cd c_icap-0.5.5 && \
+RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.7.tar.gz && \
+    tar xzvf c_icap-0.5.7.tar.gz && \
+    cd c_icap-0.5.7 && \
     ./configure --enable-large-files --enable-lib-compat --prefix=$C_ICAP_DIR && \
     make -j4 && \
     make install
