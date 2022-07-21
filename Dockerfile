@@ -8,10 +8,10 @@ RUN apt-get update && \
     apt-get -qq -y install openssl libssl-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-# squid 5.5
-RUN wget http://www.squid-cache.org/Versions/v5/squid-5.5.tar.gz && \
-    tar xzvf squid-5.5.tar.gz && \
-    cd squid-5.5 && \
+# squid 5.6
+RUN wget http://www.squid-cache.org/Versions/v5/squid-5.6.tar.gz && \
+    tar xzvf squid-5.6.tar.gz && \
+    cd squid-5.6 && \
     ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
