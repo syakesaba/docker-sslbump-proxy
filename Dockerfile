@@ -9,9 +9,9 @@ RUN apt-get update && \
     apt-get clean
 
 # squid 5.9
-RUN wget http://www.squid-cache.org/Versions/v5/squid-5.9.tar.gz && \
-    tar xzvf squid-5.9.tar.gz && \
-    cd squid-5.9 && \
+RUN wget http://www.squid-cache.org/Versions/v6/squid-6.1.tar.gz && \
+    tar xzvf squid-6.1.tar.gz && \
+    cd squid-6.1 && \
     ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
