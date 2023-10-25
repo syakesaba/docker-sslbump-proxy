@@ -8,18 +8,18 @@ RUN apt-get update && \
     apt-get -qq -y install openssl libssl-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-# squid 5.9
-RUN wget http://www.squid-cache.org/Versions/v6/squid-6.1.tar.gz && \
-    tar xzvf squid-6.1.tar.gz && \
-    cd squid-6.1 && \
+# squid 6.3
+RUN wget http://www.squid-cache.org/Versions/v6/squid-6.3.tar.gz && \
+    tar xzvf squid-6.3.tar.gz && \
+    cd squid-6.3 && \
     ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
 
-# c-icap 0.5.10
-RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.10.tar.gz && \
-    tar xzvf c_icap-0.5.10.tar.gz && \
-    cd c_icap-0.5.10 && \
+# c-icap 0.5.11
+RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.11.tar.gz && \
+    tar xzvf c_icap-0.5.11.tar.gz && \
+    cd c_icap-0.5.11 && \
     ./configure --enable-large-files --enable-lib-compat --prefix=$C_ICAP_DIR && \
     make -j4 && \
     make install
