@@ -4,7 +4,7 @@ squid + c-icap
 
 Baseimage
 ======================
-debian:latest
+debian:stable-slim
 
 Usage
 ======================

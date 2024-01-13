@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:stable-slim
 MAINTAINER SYA-KE <syakesaba@gmail.com>
 
 ENV SQUID_DIR /usr/local/squid
@@ -8,18 +8,18 @@ RUN apt-get update && \
     apt-get -qq -y install openssl libssl-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-# squid 6.3
-RUN wget http://www.squid-cache.org/Versions/v6/squid-6.3.tar.gz && \
-    tar xzvf squid-6.3.tar.gz && \
-    cd squid-6.3 && \
+ARG squid_version="6.6"
+RUN wget http://www.squid-cache.org/Versions/v6/squid-${squid_version}.tar.gz && \
+    tar xzvf squid-${squid_version}.tar.gz && \
+    cd squid-${squid_version} && \
     ./configure --prefix=$SQUID_DIR --with-openssl --enable-ssl-crtd --with-large-files && \
     make -j4 && \
     make install
 
-# c-icap 0.5.11
-RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.5.x/c_icap-0.5.11.tar.gz && \
-    tar xzvf c_icap-0.5.11.tar.gz && \
-    cd c_icap-0.5.11 && \
+ARG c_icap_version="0.6.2"
+RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.6.x/c_icap-${c_icap_version}.tar.gz && \
+    tar xzvf c_icap-${c_icap_version}.tar.gz && \
+    cd c_icap-${c_icap_version} && \
     ./configure --enable-large-files --enable-lib-compat --prefix=$C_ICAP_DIR && \
     make -j4 && \
     make install
