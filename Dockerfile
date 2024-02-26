@@ -8,7 +8,8 @@ RUN apt-get update && \
     apt-get -qq -y install openssl libssl-dev build-essential wget curl net-tools dnsutils tcpdump libcap-dev  && \
     apt-get clean
 
-ARG squid_version="6.6"
+# https://www.squid-cache.org/Versions/
+ARG squid_version="6.7"
 RUN wget http://www.squid-cache.org/Versions/v6/squid-${squid_version}.tar.gz && \
     tar xzvf squid-${squid_version}.tar.gz && \
     cd squid-${squid_version} && \
@@ -16,6 +17,7 @@ RUN wget http://www.squid-cache.org/Versions/v6/squid-${squid_version}.tar.gz &&
     make -j4 && \
     make install
 
+# https://c-icap.sourceforge.net/download.html
 ARG c_icap_version="0.6.2"
 RUN wget https://jaist.dl.sourceforge.net/project/c-icap/c-icap/0.6.x/c_icap-${c_icap_version}.tar.gz && \
     tar xzvf c_icap-${c_icap_version}.tar.gz && \
