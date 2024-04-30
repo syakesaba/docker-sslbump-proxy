@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get clean
 
 # https://www.squid-cache.org/Versions/
-ARG squid_version="6.7"
+ARG squid_version="6.9"
 RUN wget http://www.squid-cache.org/Versions/v6/squid-${squid_version}.tar.gz && \
     tar xzvf squid-${squid_version}.tar.gz && \
     cd squid-${squid_version} && \
